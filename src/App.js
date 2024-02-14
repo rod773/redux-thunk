@@ -29,10 +29,7 @@ function App() {
   const onLoad = () => {
     dispatch(loadNotes());
 
-    notes.forEach((value) => {
-      array.push(value);
-    });
-    console.log(array);
+    ObjectToArray(notes);
   };
 
   return (
