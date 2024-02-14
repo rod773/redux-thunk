@@ -6,7 +6,15 @@ import { saveNotes, loadNotes } from "./notesReducer";
 function App() {
   const notes = useSelector((state) => state.notes);
 
-  const array = [];
+  const ObjectToArray = (object) => {
+    const array = [];
+    object.forEach((value) => {
+      array.push(value);
+    });
+    return array;
+  };
+
+  const array = ObjectToArray(notes);
 
   const dispatch = useDispatch();
 
@@ -20,12 +28,11 @@ function App() {
 
   const onLoad = () => {
     dispatch(loadNotes());
-    if (notes) {
-      notes.forEach((value) => {
-        array.push(value);
-      });
-      console.log(array);
-    }
+
+    notes.forEach((value) => {
+      array.push(value);
+    });
+    console.log(array);
   };
 
   return (
@@ -35,13 +42,13 @@ function App() {
       <div>
         {array.map((item, i) => {
           return (
-            <tr key={item.id}>
-              <th scope="row">{item.id}</th>
-              <td>{item.nombre}</td>
-              <td>{item.apellido}</td>
-              <td>{item.usuario}</td>
-              <td>{item.email}</td>
-            </tr>
+            <ul key={item.id}>
+              <li scope="row">{item.id}</li>
+              <li>{item.nombre}</li>
+              <li>{item.apellido}</li>
+              <li>{item.usuario}</li>
+              <li>{item.email}</li>
+            </ul>
           );
         })}
       </div>
