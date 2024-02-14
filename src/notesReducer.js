@@ -31,6 +31,6 @@ export const saveNotes = () => async (dispatch, getState) => {
 } 
 
 export const loadNotes = () => async (dispatch, getState) => {
-  const notes = await fetch("http://localhost:4000/notes").then(res => res.json())
+  const notes = await fetch("http://localhost:8080/index.php/wp-json/trabajadores/v1/todos").then(res => res.json())
   dispatch(setNotes(notes))
 } 
