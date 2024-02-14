@@ -1,4 +1,3 @@
-import React from "react";
 import { NewNoteInput } from "./NewNoteInput";
 import { useSelector, useDispatch } from "react-redux";
 import { addNote } from "./actions";
@@ -6,6 +5,9 @@ import { saveNotes, loadNotes } from "./notesReducer";
 
 function App() {
   const notes = useSelector((state) => state.notes);
+
+  const array = [];
+
   const dispatch = useDispatch();
 
   const onAddNote = (note) => {
@@ -18,17 +20,32 @@ function App() {
 
   const onLoad = () => {
     dispatch(loadNotes());
+    if (notes) {
+      notes.forEach((value) => {
+        array.push(value);
+      });
+      console.log(array);
+    }
   };
 
   return (
     <>
       <NewNoteInput addNote={onAddNote} />
       <hr />
-      <ul>
-        {notes.map((note) => {
-          return <li key={note}>{note}</li>;
+      <div>
+        {array.map((item, i) => {
+          return (
+            <tr key={item.id}>
+              <th scope="row">{item.id}</th>
+              <td>{item.nombre}</td>
+              <td>{item.apellido}</td>
+              <td>{item.usuario}</td>
+              <td>{item.email}</td>
+            </tr>
+          );
         })}
-      </ul>
+      </div>
+
       <hr />
       <button onClick={onSave}>Save</button>
       <button onClick={onLoad}>Load</button>

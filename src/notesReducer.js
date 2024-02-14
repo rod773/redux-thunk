@@ -45,7 +45,5 @@ export const loadNotes = () => async (dispatch, getState) => {
 
   const notes = await axios(config).then((res) => res.data);
 
-  console.log(notes);
-
   dispatch(setNotes(notes));
 };
